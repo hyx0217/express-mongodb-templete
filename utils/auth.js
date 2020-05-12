@@ -16,21 +16,22 @@ module.exports = {
       if (req.originalUrl.includes('/public')) {
         return next()
       } else {
-        if (req.header('Authorization')) {
-          const token = req.header('Authorization').split(' ')[1]
+        if (req.header('token')) {
+          const token = req.header('token');
           let name
+          console.log(jwt.verify(token, AUTH_SECRET).name)
           try {
             name = jwt.verify(token, AUTH_SECRET).name;
           } catch (error) {
-            return res.status(401).json({code:401,msg:'token无效'})
+            return res.status(401).json({code:401,msg:'token无效',data:''})
           }
           User.find({ user_name: name, token }).then((data) => {
             if (data.length === 0) {
-             return res.status(401).json({ code: 401, msg: '登录过期，请重新登录' })
+             return res.status(401).json({ code: 401, msg: '登录过期，请重新登录',data:'' })
             }
           })
         } else {
-          return res.status(401).json({ code: 401, msg: 'No Authorization was found' })
+          return res.status(401).json({ code: 401, msg: 'No token was found',data:'' })
         }
       }
      return next()
