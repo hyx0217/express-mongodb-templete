@@ -1,5 +1,5 @@
 # express-mongodb-templete
-基于express的jwt鉴权的后台接口模板
+基于express的jwt鉴权的后台接口模板,实现了简单的登录、注册、修改密码、获取列表功能
 # 开发环境
 需要安装mongdb
 # 安装
