@@ -5,6 +5,7 @@ var jwt = require('jsonwebtoken')
 module.exports = {
   //登录
   login: function (req, res, next) {
+    console.log(req.body);
     let { userName, password } = req.body
     User.find({ user_name: userName, password }).then((data) => {
       if (data.length === 0) {
