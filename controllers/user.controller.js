@@ -17,6 +17,8 @@ module.exports = {
         delete data[0].password
         res.json({ code: 1, msg: '登录成功', data: data[0] })
       }
+    }).catch(err=>{
+      console.log(err)
     })
   },
   //注册
